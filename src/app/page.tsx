@@ -81,16 +81,23 @@ export default function MarketingDashboard() {
   const [updatedTime, setUpdatedTime] = useState<string>('');
   const [data, setData] = useState<RegionData>(mockDatabase['All regions']);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
-  // Format Waktu Real-Time (ditambahkan detik agar perubahan langsung terlihat jelas)
+  // Format Waktu Real-Time
   const updateTimestamp = (): void => {
     const now = new Date();
     const formatted = `${now.getDate()} ${now.toLocaleString('en-US', { month: 'short' })}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')}`;
     setUpdatedTime(formatted);
   };
 
+  // Timer Real-Time Berjalan Setiap Detik
   useEffect(() => {
-    updateTimestamp();
+    updateTimestamp(); // Update awal saat komponen di-mount
+    const timer = setInterval(() => {
+      updateTimestamp();
+    }, 1000);
+
+    return () => clearInterval(timer); // Cleanup timer saat unmount
   }, []);
 
   // Update Data berdasarkan Filter Region
@@ -102,11 +109,9 @@ export default function MarketingDashboard() {
     }
   }, [region]);
 
-  // PERBAIKAN PADA FUNGSI REFRESH
   const handleRefresh = (): void => {
     setIsRefreshing(true);
-
-    // Memberikan delay 600ms untuk efek animasi putar & pembaruan data
+    setIsMenuOpen(false); // Otomatis tutup menu mobile saat diklik
     setTimeout(() => {
       updateTimestamp();
       setIsRefreshing(false);
@@ -121,13 +126,26 @@ export default function MarketingDashboard() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
+      {/* Header / Navbar */}
       <header className={styles.header}>
         <div className={styles.titleSection}>
           <div className={styles.yellowIndicator} />
           <h1 className={styles.title}>Marketing Dashboard</h1>
         </div>
-        <div className={styles.headerActions}>
+
+        {/* Tombol Hamburger dengan Animasi Garis */}
+        <button
+          className={`${styles.hamburgerBtn} ${isMenuOpen ? styles.hamburgerActive : ''}`}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle navigation menu"
+        >
+          <span className={styles.bar} />
+          <span className={styles.bar} />
+          <span className={styles.bar} />
+        </button>
+
+        {/* Menu Actions (Refresh, Time, Logo) */}
+        <div className={`${styles.headerActions} ${isMenuOpen ? styles.menuOpen : ''}`}>
           <span className={styles.updatedTime}>Updated {updatedTime}</span>
           <button
             className={styles.btnRefresh}

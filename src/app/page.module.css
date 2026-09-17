@@ -1,18 +1,20 @@
+/* Container Utama */
 .container {
   max-width: 1400px;
   margin: 0 auto;
   padding: 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1f2937;
 }
 
 /* Header Area */
 .header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-bottom: 20px;
-  /* Jarak antara konten navbar (judul, tombol, logo) dengan garis bawah */
   margin-bottom: 28px;
-  /* Jarak dari garis bawah ke konten di bawah navbar (filter bar) */
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -25,16 +27,19 @@
 .yellowIndicator {
   width: 6px;
   height: 28px;
-  background-color: var(--primary-yellow);
+  background-color: #f5b014;
   border-radius: 3px;
+  flex-shrink: 0;
 }
 
 .title {
   font-size: 24px;
   font-weight: 700;
-  color: var(--text-main);
+  color: #1f2937;
+  margin: 0;
 }
 
+/* Header Actions */
 .headerActions {
   display: flex;
   align-items: center;
@@ -43,12 +48,13 @@
 
 .updatedTime {
   font-size: 13px;
-  color: var(--text-muted);
+  color: #6b7280;
+  white-space: nowrap;
 }
 
 .btnRefresh {
-  background-color: var(--primary-yellow);
-  color: #000;
+  background-color: #f5b014;
+  color: #000000;
   border: none;
   padding: 8px 16px;
   border-radius: 8px;
@@ -61,99 +67,111 @@
   transition: opacity 0.2s;
   flex-shrink: 0;
   height: 38px;
-  /* Menentukan tinggi tetap agar proporsional dengan logo */
   white-space: nowrap;
-  /* Mencegah teks tertekuk ke bawah */
 }
 
 .btnRefresh:hover {
   opacity: 0.9;
 }
 
+.btnRefresh:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
 .logo {
   object-fit: contain;
 }
 
-/* Filter Controls */
+/* Filter Controls Bar */
 .filterBar {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .filtersGroup {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: fit-content;
 }
 
 .filterControl {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  flex: 1;
+  min-width: 140px;
 }
 
 .filterLabel {
   font-size: 11px;
   font-weight: 700;
-  color: var(--text-muted);
+  color: #6b7280;
   letter-spacing: 0.5px;
 }
 
 .selectInput {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
-  min-width: 160px;
+  width: 100%;
   outline: none;
   cursor: pointer;
 }
 
 .btnReset {
-  background-color: transparent;
-  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
   padding: 8px 16px;
   border-radius: 8px;
-  color: var(--text-main);
+  color: #1f2937;
   font-weight: 500;
   cursor: pointer;
-  background-color: var(--card-bg);
+  height: 38px;
+  white-space: nowrap;
 }
 
 .btnReset:hover {
   background-color: #f0f0f0;
 }
 
-/* Highlight / Hero Banner */
+/* Highlight Banner */
 .highlightBanner {
-  background-color: var(--card-bg);
-  border-left: 5px solid var(--primary-yellow);
+  background-color: #ffffff;
+  border-left: 5px solid #f5b014;
   border-radius: 8px;
   padding: 16px 20px;
   font-size: 16px;
   margin-bottom: 24px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  line-height: 1.5;
 }
 
 .highlightText strong {
-  color: var(--text-main);
+  color: #1f2937;
 }
 
-/* Summary Cards Grid */
+/* Summary KPI Cards Grid */
 .cardsGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
   margin-bottom: 24px;
 }
 
 .card {
-  background-color: var(--card-bg);
-  border-radius: var(--card-radius);
+  background-color: #ffffff;
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #e5e7eb;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -171,18 +189,19 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: var(--primary-yellow);
+  background-color: #f5b014;
+  flex-shrink: 0;
 }
 
 .cardTitle {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text-main);
+  color: #1f2937;
 }
 
 .cardSub {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #6b7280;
   margin-left: auto;
 }
 
@@ -194,7 +213,7 @@
 
 .cardFooter {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #6b7280;
 }
 
 .tagHighlight {
@@ -211,16 +230,16 @@
 /* Main Content Charts Section */
 .chartsGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
   gap: 20px;
   margin-bottom: 24px;
 }
 
 .chartCard {
-  background-color: var(--card-bg);
-  border-radius: var(--card-radius);
+  background-color: #ffffff;
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #e5e7eb;
 }
 
 .chartTitle {
@@ -231,11 +250,10 @@
 
 .chartSubtitle {
   font-size: 12px;
-  color: var(--text-muted);
+  color: #6b7280;
   margin-bottom: 20px;
 }
 
-/* Horizontal Bar Custom */
 .barList {
   display: flex;
   flex-direction: column;
@@ -251,7 +269,10 @@
 
 .barLabel {
   font-size: 12px;
-  color: var(--text-main);
+  color: #1f2937;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .barTrack {
@@ -262,7 +283,7 @@
 }
 
 .barFill {
-  background-color: var(--primary-yellow);
+  background-color: #f5b014;
   height: 100%;
   border-radius: 4px;
   transition: width 0.4s ease;
@@ -270,16 +291,16 @@
 
 .barMeta {
   font-size: 11px;
-  color: var(--text-muted);
+  color: #6b7280;
   text-align: right;
+  white-space: nowrap;
 }
 
-/* Full Width Chart (Donut / Mix) */
 .fullCard {
-  background-color: var(--card-bg);
-  border-radius: var(--card-radius);
+  background-color: #ffffff;
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid var(--border-color);
+  border: 1px solid #e5e7eb;
 }
 
 .donutContainer {
@@ -288,12 +309,14 @@
   justify-content: center;
   gap: 40px;
   margin-top: 10px;
+  flex-wrap: wrap;
 }
 
 .donutWrapper {
   width: 120px;
   height: 120px;
   position: relative;
+  flex-shrink: 0;
 }
 
 .donutSvg {
@@ -304,6 +327,7 @@
 .legend {
   display: flex;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .legendItem {
@@ -311,13 +335,13 @@
   align-items: center;
   gap: 8px;
   font-size: 13px;
-  color: var(--text-main);
+  color: #1f2937;
 }
 
 .legendSquareYellow {
   width: 12px;
   height: 12px;
-  background-color: var(--primary-yellow);
+  background-color: #f5b014;
 }
 
 .legendSquareOrange {
@@ -326,17 +350,6 @@
   background-color: #d97706;
 }
 
-@media (max-width: 1024px) {
-  .cardsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .chartsGrid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Animasi Putar */
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -352,7 +365,123 @@
   animation: spin 0.8s linear infinite;
 }
 
-.btnRefresh:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
+/* === TOMBOL HAMBURGER (PERBAIKAN UTAMA) === */
+.hamburgerBtn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 100;
+  margin-left: auto;
+  /* Pakai flexbox agar ketiga garis sejajar presisi di tengah */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  /* Jarak antar garis seragam */
+}
+
+/* Garis-Garis Hitam */
+.bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  /* Ketebalan garis dikunci sama */
+  background-color: #000000 !important;
+  border-radius: 2px;
+  margin: 0;
+  /* Hapus margin agar tidak mengubah ketebalan visual */
+  transform-origin: center;
+  /* Kunci titik rotasi di tengah garis */
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+/* Animasi ke 'X' saat Aktif */
+.hamburgerActive .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburgerActive .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerActive .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* === MEDIA QUERIES MOBILE (< 1024px) === */
+@media (max-width: 1024px) {
+  .hamburgerBtn {
+    display: flex !important;
+    /* Paksa Tampil di Mobile/Tablet */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .headerActions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    z-index: 90;
+    gap: 14px;
+
+    /* Hidden Dropdown State */
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .headerActions.menuOpen {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .updatedTime {
+    text-align: center;
+  }
+
+  .logo {
+    margin: 0 auto;
+  }
+
+  .filtersGroup {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .filterControl {
+    min-width: 100%;
+  }
+
+  .btnReset {
+    width: 100%;
+  }
+
+  .chartsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .barRow {
+    grid-template-columns: 80px 1fr 90px;
+    gap: 8px;
+  }
 }
